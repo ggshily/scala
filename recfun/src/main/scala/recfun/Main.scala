@@ -28,7 +28,7 @@ object Main {
    * Exercise 2
    */
   def balance(chars: List[Char]): Boolean = {
-    def countParenthese(count: Int): Boolean = {
+    def countParenthese(chars: List[Char], count: Int): Boolean = {
 	  if(chars.isEmpty)
 	    return count == 0;
 	  if(count < 0)
@@ -41,29 +41,27 @@ object Main {
 	  countParenthese(chars.tail, count)
 	}
 	
-	countParenthese(=0)
+	countParenthese(chars, 0)
   }
 
   /**
    * Exercise 3
    */
   def countChange(money: Int, coins: List[Int]): Int = {
+    if(money <= 0 || coins.isEmpty)
+		return 0;
+  
     coins.sorted
   
-    def count(money: Int, coins: List[Int], counts: List[Int], sum: Int): Int = {
-	  val total: Int = 0
+    def loop(n: Int, m: Int): Int = {
+	  if(n == 0) return 1;
+	  if(n < 0) return 0;
+	  if(m < 0 && n >= 1) return 0;
 	  
-	  do {
-	  
-	  
-	  
-	  } while(success)
-	  
-	  return total
+	  return loop(n, m - 1) + loop(n - coins(m), m);
 	}
 	
-	val counts = coins.map(x => 0)
-	count(money, coins, counts, 0)
+	loop(money, coins.size - 1)
   }
   
 }
